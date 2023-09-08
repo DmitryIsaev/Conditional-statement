@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
@@ -17,32 +18,32 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         int water = 0;
         int mugOfTea;
-        int guests = 0;
+        int guests;
         final int teapot = 1000;
         water = boilingWater(water, teapot);
 
         while (true) {
-            System.out.println("Сколько пришло гостей?");
-            guests = scanner.nextInt();
-            if (guests != 0){
-                break;
+            try {
+                System.out.println("Сколько пришло гостей?");
+                Scanner scanner = new Scanner(System.in);
+                guests = scanner.nextInt();
+                if (guests != 0) {
+                    break;
+                }
+            } catch (NoSuchElementException error) {
+                System.out.println("Ошибка: введены буквы вместо чисел");
             }
         }
 
         for (mugOfTea = 1; mugOfTea <= guests; mugOfTea++) {
-            if (water >= 250) {
-                water -= 250;
-                System.out.println("Гость " + mugOfTea + " получил 250 мм чая.");
-                System.out.println("В чайнике осталось " + water + " мм воды.");
-            } else {
+            if (water < 250) {
                 water = boilingWater(water, teapot);
-                water -= 250;
-                System.out.println("Гость " + mugOfTea + " получил 250 мм чая.");
-                System.out.println("В чайнике осталось " + water + " мм воды.");
             }
+            water -= 250;
+            System.out.println("Гость " + mugOfTea + " получил 250 мм чая.");
+            System.out.println("В чайнике осталось " + water + " мм воды.");
         }
     }
 }
