@@ -5,7 +5,7 @@ public class Main {
 
     public static int boilingWater(int water, int teapot) {
         do {
-            water += 100;
+            water += 50;
         } while (water < teapot);
         System.out.println("В чайник налито " + water + " мм воды.");
 
@@ -39,10 +39,11 @@ public class Main {
 
         for (mugOfTea = 1; mugOfTea <= guests; mugOfTea++) {
             if (water < 250) {
+                System.out.println("В чайнике не осталось воды. Надо ещё разогреть.");
                 water = boilingWater(water, teapot);
             }
             water -= 250;
-            System.out.println("Гость " + mugOfTea + " получил 250 мм чая.");
+            System.out.println("Гость " + mugOfTea + " получил 250 мм кофе или чая.");
             System.out.println("В чайнике осталось " + water + " мм воды.");
         }
     }
