@@ -22,11 +22,17 @@ public class Main {
         int mugOfTea;
         int guests;
         final int teapot = 1000;
+
         water = boilingWater(water, teapot);
+
+        String[] guest = {"Надя", "Аля", "Света", "Оля", "Катя", "Лена", "Наташа", "Света", "Оксана"};
+        for (String allGuests : guest) {
+            System.out.print(allGuests + " ");
+        }
 
         while (true) {
             try {
-                System.out.println("Сколько пришло гостей?");
+                System.out.println("\nСколько пришло гостей?");
                 Scanner scanner = new Scanner(System.in);
                 guests = scanner.nextInt();
                 if (guests != 0) {
@@ -38,13 +44,17 @@ public class Main {
         }
 
         for (mugOfTea = 1; mugOfTea <= guests; mugOfTea++) {
-            if (water < 250) {
-                System.out.println("В чайнике не осталось воды. Надо ещё разогреть.");
-                water = boilingWater(water, teapot);
+            try {
+                if (water < 250) {
+                    System.out.println("В чайнике не осталось воды. Надо ещё разогреть.");
+                    water = boilingWater(water, teapot);
+                }
+                water -= 250;
+                System.out.println(guest[mugOfTea - 1] + " получила 250 мм кофе или чая.");
+                System.out.println("В чайнике осталось " + water + " мм воды.");
+            } catch (IndexOutOfBoundsException error) {
+                System.out.println("Остальные гости без чая");
             }
-            water -= 250;
-            System.out.println("Гость " + mugOfTea + " получил 250 мм кофе или чая.");
-            System.out.println("В чайнике осталось " + water + " мм воды.");
         }
     }
 }
